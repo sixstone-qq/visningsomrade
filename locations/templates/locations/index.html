@@ -25,15 +25,25 @@
         });
       }
 
+      // Nothing in the wood or mountain
+      var valid_types = new Set(["street_address", "premise",
+                                 "intersection", "ward", "locality", "sublocality",
+                                 "neighborhood", "airport", "point_of_interest"]);
+
       // Place a marker if the position has a real address
       function placeMarker(location, map, geocoder) {
         geocoder.geocode({'location': location}, function(results, status) {
           if (status === google.maps.GeocoderStatus.OK) {
             if (results[0]) {
-               console.log("Result: " + results[0]);
                console.log("Formatted address: " + results[0]['formatted_address']);
-               var marker = new google.maps.Marker({position: location,
-                                                    map: map});
+               console.log("Types: " + results[0]['types']);
+               for (type of results[0]['types']) {
+                 if (valid_types.has(type)) {
+                      var marker = new google.maps.Marker({position: location,
+                                                           map: map});
+                      break;
+                 }
+               }
             } else {
                console.log("No results for geocoder reverse lookup...");
             }
