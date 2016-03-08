@@ -10,6 +10,16 @@
   </head>
   <body>
     <div id="map"></div>
+    <div id="addresses">
+      <h4>Addresses</h4>
+      <ul id="addresses_list">
+        {% for loc in locations %}
+           {% if loc.address %}
+        <li>{{ loc.address }}</li>
+           {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
     <script>
       function initMap() {
         // Create the viewport map
