@@ -1,1 +1,4 @@
+coverage==4.0.3
 Django==1.9.4
+djangorestframework==3.3.2
+pyflakes==1.1.0
