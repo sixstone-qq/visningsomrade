@@ -49,6 +49,17 @@
                console.log("Types: " + results[0]['types']);
                for (type of results[0]['types']) {
                  if (valid_types.has(type)) {
+                      // Send data to server
+                      $.post("{% url 'locations:location-list' %}",
+                             { lat: location.lat, lon: location.lng,
+                               address: results[0]['formatted_address'] })
+                            .done(function (data, status) {
+                                  // Add the li if creation
+                                  if (status == 201) {
+                                    $("#addresses_list").append("<li>" +
+      results[0]['formatted_address'] + "</li>");
+                                  }
+                                    });
                       var marker = new google.maps.Marker({position: location,
                                                            map: map});
                       break;
