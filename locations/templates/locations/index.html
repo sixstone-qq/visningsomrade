@@ -6,20 +6,28 @@
     <title>visingsomrade</title>
     <style>
       #map {width: 800px; height: 500px}
+      .clear {clear: both }
+      .half-left, .half-right { float: left; width: 49% }
+      .half-left {margin-right: 2%; clear: left}
     </style>
   </head>
   <body>
     <div id="map"></div>
-    <div id="addresses">
-      <h4>Addresses</h4>
-      <ul id="addresses_list">
-        {% for loc in locations %}
-           {% if loc.address %}
-        <li>{{ loc.address }}</li>
-           {% endif %}
-        {% endfor %}
-      </ul>
+    <div id="addresses" class="half-left">
+        <h4>Addresses</h4>
+        <ul id="addresses_list">
+          {% for loc in locations %}
+          {% if loc.address %}
+          <li>{{ loc.address }}</li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    <div class="half-right">
+      <h4>Start fresh</h4>
+      <input id="reset" type="button" value="Reset addresses list"/>
     </div>
+    <div class="clear"></div>
     <script>
       function initMap() {
         // Create the viewport map
@@ -33,6 +41,27 @@
         map.addListener('click', function(event) {
           placeMarker(event.latLng, map, geocoder);
         });
+
+        // Add already available markers
+        var marker;
+        {% for loc in locations %}
+           marker = new google.maps.Marker({position: {lat: {{ loc.lat }},
+                                                       lng: {{ loc.lon }} },
+                                            map: map});
+           markersArray.push(marker);
+        {% endfor %}
+
+        // Add listener to reset addresses
+        $("#reset").first()[0].addEventListener('click', function() { resetAddresses(map) });
+      }
+
+      // To clean the markers
+      var markersArray = [];
+      function clearOverlays() {
+        for (var i = 0; i < markersArray.length; i++ ) {
+           markersArray[i].setMap(null);
+        }
+        markersArray.length = 0;
       }
 
       // Nothing in the wood or mountain
@@ -55,13 +84,14 @@
                                address: results[0]['formatted_address'] })
                             .done(function (data, status) {
                                   // Add the li if creation
-                                  if (status == 201) {
+                                  if (status == "success") {
                                     $("#addresses_list").append("<li>" +
       results[0]['formatted_address'] + "</li>");
                                   }
                                     });
                       var marker = new google.maps.Marker({position: location,
                                                            map: map});
+                      markersArray.push(marker);
                       break;
                  }
                }
@@ -73,6 +103,17 @@
           }
         });
       }
+
+      // Reset addresses on server-side and remove the UI here
+      function resetAddresses(map) {
+        $.post("{% url 'locations:location-empty' %}")
+         .done(function (data) {
+            $('#addresses_list').empty();
+            clearOverlays();
+            $('<div>Emptied...</div>').appendTo('.half-right').fadeOut('slow');
+          });
+      }
+
     </script>
     <script async defer src="http://maps.google.com/maps/api/js?callback=initMap"></script>
   </body>
