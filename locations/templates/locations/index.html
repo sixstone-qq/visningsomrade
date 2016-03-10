@@ -32,36 +32,28 @@
       function initMap() {
         // Create the viewport map
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 7,
+          zoom: 11,
           center: new google.maps.LatLng(41.637086, -0.885620)
         });
         var geocoder = new google.maps.Geocoder;
 
+        // Add FusionTable layer
+        var layer = new google.maps.FusionTablesLayer({
+          query: {
+            select: '{{ ft_location_field_name }}',
+            from: '{{ ft_table_name }}'
+          }
+        });
+        layer.setMap(map);
+
         // Add a marker when you click
         map.addListener('click', function(event) {
-          placeMarker(event.latLng, map, geocoder);
+          placeMarker(event.latLng, map, geocoder, layer);
         });
 
-        // Add already available markers
-        var marker;
-        {% for loc in locations %}
-           marker = new google.maps.Marker({position: {lat: {{ loc.lat }},
-                                                       lng: {{ loc.lon }} },
-                                            map: map});
-           markersArray.push(marker);
-        {% endfor %}
-
         // Add listener to reset addresses
-        $("#reset").first()[0].addEventListener('click', function() { resetAddresses(map) });
-      }
-
-      // To clean the markers
-      var markersArray = [];
-      function clearOverlays() {
-        for (var i = 0; i < markersArray.length; i++ ) {
-           markersArray[i].setMap(null);
-        }
-        markersArray.length = 0;
+        $("#reset").first()[0].addEventListener('click',
+                                                function() { resetAddresses(map, layer); });
       }
 
       // Nothing in the wood or mountain
@@ -70,7 +62,7 @@
                                  "neighborhood", "airport", "point_of_interest"]);
 
       // Place a marker if the position has a real address
-      function placeMarker(location, map, geocoder) {
+      function placeMarker(location, map, geocoder, layer) {
         geocoder.geocode({'location': location}, function(results, status) {
           if (status === google.maps.GeocoderStatus.OK) {
             if (results[0]) {
@@ -87,11 +79,10 @@
                                   if (status == "success") {
                                     $("#addresses_list").append("<li>" +
       results[0]['formatted_address'] + "</li>");
+                                    updateFTLayer(layer);
                                   }
-                                    });
-                      var marker = new google.maps.Marker({position: location,
-                                                           map: map});
-                      markersArray.push(marker);
+                            });
+
                       break;
                  }
                }
@@ -104,17 +95,30 @@
         });
       }
 
+      // Update FusionTableLayer
+      function updateFTLayer(layer) {
+        layer.setOptions({
+                          query: {
+                            select: '{{ ft_location_field_name }}',
+                            from: '{{ ft_table_name }}',
+                            where: "{{ ft_location_field_name }} not equal to" + (-1 * Math.floor(Math.random() * 10000000)).toString()
+                            }
+                         });
+      }
+
       // Reset addresses on server-side and remove the UI here
-      function resetAddresses(map) {
+      function resetAddresses(map, layer) {
         $.post("{% url 'locations:location-empty' %}")
          .done(function (data) {
             $('#addresses_list').empty();
-            clearOverlays();
+            updateFTLayer(layer);
             $('<div>Emptied...</div>').appendTo('.half-right').fadeOut('slow');
           });
       }
 
     </script>
-    <script async defer src="http://maps.google.com/maps/api/js?callback=initMap"></script>
+    <script async defer
+            src="http://maps.google.com/maps/api/js?callback=initMap&key={{ api_key }}"
+            ></script>
   </body>
 </html>

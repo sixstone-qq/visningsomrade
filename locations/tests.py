@@ -2,6 +2,8 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APITestCase
+from unittest.mock import patch
+
 
 from .models import Location
 
@@ -17,7 +19,9 @@ class LocationTests(TestCase):
 
 
 class LocationAPITests(APITestCase):
-    def test_empty(self):
+
+    @patch('locations.fusiontables.LocationFTService')
+    def test_empty(self, mock_class):
         """Test creation and empty a list of addresses"""
         url = reverse('locations:location-list')
         loc_data = {'lat': 2.2, 'lon': 2.2, 'address': 'Nice one'}

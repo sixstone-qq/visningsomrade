@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "visningsomrade",
+  "private_key_id": "7d5e284ab01543876e9c265c402888afcee48c82",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCPoMq1fj3euF5N\nR6+mdv1oItVkHRdrcmZAmY+T89RKdk/1qLbL0fyqVNebKz+sOwE4mbA4a3appCbX\nHpaJkj+2yYOJRvOp0cTtu8Wzv60XZ4McTGL1zAjqURYfYRPCPcY0HGDHIPLPdGL9\nxd1adTHvBl6Vh9QlYAuj8VylRFiC4uZHTq4599Ulchk0PtWhvzAFW1Q5CO0k7CrX\nnNk3y5A6Nm4qab7OZNVDvxpudCh7kOu6fociA060E/TptmedvH+8YPQ1Ttu2XTHt\nmPkugwCCQfooAiOB15mTVLX0iSLbqJId8KMPAhCPeXGEj/EO8mi/eHGFXTnq6KZ1\npREP4vHJAgMBAAECggEAen2S434qnct3AUllz/4i17D9dEgrNQN3mRhdjrygDHEi\neEvOubz4UvvQdRFJWEVqIS9RToy3wq2wQj5f/CuyEt2BRI4yOF4iKO2/CjEqGY+6\nDWRH8YB1CgDlcRWFmF6+rqqVDr5W1f5Yfj1FLmRMlaFFARm6H7Xtt3+cl4XWRqiR\nII423n2ilCg8t24E4maGrrxQJdIYW4tkD+tWYYBTY0pOwLQZRPfwr7vOm7vTaAAv\n59RcPzyrvpIxymEcXSHKHRPhxGCXLqwZF7qZnQ9eRgFDQUlGbaOarnmAG4YwBfjn\nbLgVDcHPHbL35phO/RyIX00rjV18EC7/DN36nUyeAQKBgQD6VqblkWUCDTMB5EZA\nT4ZQO1cTCdHV4rtOn+nka28vbRWxtlZe6ORu5ETsljulH03LJoHbtsbMjjgKlwVE\nF8iiU9DuGo8S+81nnbcvj0w18dPTPC8tADm/HtA0x6AKPv3fsnVZ3ePsQjscBmZP\nS94KiTbloYuDkg4v7c0muG2oeQKBgQCS4FWZJha2gXOKS/ua1XoS5imPt4zXebkd\nm8ookdlu+8ioUrfjeS6WvfTmq2DEtl3zH5xIP7g8LutI94gM56FscjC5GZWJq8xX\nqOMVDR4USCM2kvI8/gs6gLylkxz3EL6kZZWfmpQy2dRk8tkx+pOCYOHOT3gK5B2v\nusVujLPf0QKBgQC2bhU78KOqRhIoy8DCNvHLYCMJVbub4ZncJz8cXYpuBlGr6xOw\nIInvodv0iVq370MSy2IQyna/NNj0JrAIukhUuz3jdmlTTTqXyuBnAUdpfGyAYDiE\n08hBVeQmwl8HeHYr4XIRZlkln/JRbvx5xvDtvqbJ2tq/q9044lQBZp9LCQKBgH4t\n95ugWzbjM02GRVsZNsxxqxbqiza6PcwwAJal5fQwnovstEnZ26po+rIIXRPh0AiE\nCZEQHMinTj7bWKgtfkJaP31le1BQpTZRwvRc1pB6ALZru2umnCLgYjCkl+exHPbC\nxq3c8KBW/t7SusDzEjKZ5KOHJgvFObO0ctSsUANhAoGBAMsf1JtqIMXN8wqjhlGt\n+NjcJJtnjh8xBrlz8QHr4QUWupBI//KQP0RmZg9Av8a9nLYeKmieCM6NQw4lXNNd\nvgLMRF0GSImhXv2F5MYFb86K7XwhilrJcUW34yeA6LWWJbnKs3H91w4+6jBoC3ov\nQJpa3nCn/I1pi9Nw4oRojY5P\n-----END PRIVATE KEY-----\n",
+  "client_email": "visningsomrade@visningsomrade.iam.gserviceaccount.com",
+  "client_id": "106732879723995232440",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/visningsomrade%40visningsomrade.iam.gserviceaccount.com"
+}

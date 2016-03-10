@@ -121,3 +121,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Locations configuration
+LOCATIONS = {
+    # FIXME: This should be anonymize (Testing purposes)
+    'FUSIONTABLES_API_KEY': 'AIzaSyAMDTVrjHiIvL-XQXFs42PK8OjJGozXUBo',
+    'LOCATION_FIELD_NAME': 'Location',
+    'FUSIONTABLES_TABLE_ID': '1ZAs9kb-0OpmkFjcGG7kZEwRH-UnBCclKzrdnWtJy',
+    'FUSIONTABLES_KEYFILE_NAME': 'Visningsomrade-7d5e284ab015.json'
+}
