@@ -13,3 +13,7 @@ class Location(models.Model):
             address=" " + self.address if len(self.address) > 0 else "",
             lat=self.lat,
             lon=self.lon)
+
+    class Meta:
+        # Avoid duplicates
+        unique_together = (('lat', 'lon'),)
